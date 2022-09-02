@@ -32,9 +32,10 @@ const setAllMenu = async () => {
              spinner(true);
         }
     }
+   
 }
-setAllMenu();
 
+setAllMenu();
 
 
 const loadAllNews = async (category_id) => {
@@ -43,6 +44,7 @@ const loadAllNews = async (category_id) => {
     const res = await fetch(url);
     const data = await res.json();
     // console.log(data.data);
+      
     allNewsCalegory(data.data);
      }
     catch (error) {
@@ -54,9 +56,14 @@ const loadAllNews = async (category_id) => {
 const allNewsCalegory = (news) => {
     const newsContainer = document.getElementById('news-container');
     newsContainer.innerHTML = ``;
+   
+    const inputField = document.getElementById('input-field');
+    inputField.value=`${news.length? news.length +' News Found':'Not Found any News'}`;
     news.forEach(news => {
+         
          const { title, author,details,thumbnail_url,total_view,_id} = news;
         //console.log(news);
+       
          const newDiv = document.createElement('div');
         newDiv.classList.add('row');
         newDiv.classList.add('mb-4'); 
