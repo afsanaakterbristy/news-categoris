@@ -58,11 +58,13 @@ const allNewsCalegory = (news) => {
     newsContainer.innerHTML = ``;
    
     const inputField = document.getElementById('input-field');
-    inputField.value=`${news.length? news.length +' News Found':'Not Found any News'}`;
+    inputField.value = `${news.length ? news.length + ' News Found' : 'Not Found any News'}`;
+    
+    news.sort((a, b) => b.total_view - a.total_view);
     news.forEach(news => {
          
          const { title, author,details,thumbnail_url,total_view,_id} = news;
-        //console.log(news);
+        console.log(news.total_view);
        
          const newDiv = document.createElement('div');
         newDiv.classList.add('row');
