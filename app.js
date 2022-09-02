@@ -23,7 +23,7 @@ const setAllMenu = async () => {
         unique.push(news.category_name);
         const li = document.createElement('li');
              li.innerHTML = `
-        <li class="nav-item">
+        <li onclick="loadAllNews('${news.category_id}')" class="nav-item">
             <a class="nav-link" aria-current="page" href="#">${news.category_name}</a>
         </li>
              `;
@@ -35,22 +35,27 @@ setAllMenu();
 
 
 
-const loadAllNews = async () => {
-    const url = `https://openapi.programming-hero.com/api/news/category/01`;
+const loadAllNews = async (category_id) => {
+    const url = `https://openapi.programming-hero.com/api/news/category/${category_id}`;
     const res = await fetch(url);
     const data = await res.json();
-     console.log(data.data);
+    // console.log(data.data);
     allNewsCalegory(data.data);
     }
-loadAllNews();
+
 
 const allNewsCalegory = (news) => {
     const newsContainer = document.getElementById('news-container');
+    newsContainer.innerHTML = ``;
     news.forEach(news => {
-         const { title, author, image_url,details,thumbnail_url,total_view} = news;
+         const { title, author,details,thumbnail_url,total_view,_id} = news;
         //console.log(news);
-        newsContainer.innerHTML = `
-          <div class="row g-0">
+         const newDiv = document.createElement('div');
+        newDiv.classList.add('row')
+        newDiv.classList.add('mb-4')
+        
+        newDiv.innerHTML = `
+          
         <div class="col-md-4">
             <img src="${thumbnail_url}" class="img-fluid rounded-start" alt="...">
         </div>
@@ -62,12 +67,13 @@ const allNewsCalegory = (news) => {
                 <div class="mt-3 w-25 d-flex pt-4">
                  <img src="${author.img}" class="img-fluid rounded-circle w-25"alt="...">
                 <div class="ms-2">
-                 <p>${author.name}</p>
-                <p>${author.published_date}</p>
+                 <p>${author.name? author.name:'Not Found'}</p>
+                 
+                <p>${author.published_date ? author.published_date : 'Not Found'}</p>
                 </div>
                 </div>
                 <div class="mx-5 mt-5 pt-4">
-                <p><i class="fa-regular fa-eye"></i> ${total_view}</p>
+                <p><i class="fa-regular fa-eye"></i> ${total_view ? total_view:'0'}</p>
                 </div>
                 <div class="d-flex mx-5 mt-5 pt-4">
                   <i class="fa-regular fa-star"></i>
@@ -77,13 +83,53 @@ const allNewsCalegory = (news) => {
                   <i class="fa-regular fa-star"></i>
                 </div>
                 <div class="ms-5 mt-5 pt-4">
-                <button type="button" class="btn btn-secondary">Show Details</button>
+                <button onclick="showAllDetails('${_id}')" type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">Show Details</button>
                 </div>
                 </div>
             </div>
         </div>
-                </div>
-        `; 
+                
+        `;
+        newsContainer.appendChild(newDiv)
     })
 
 }
+
+
+const showAllDetails = async(news_id) => {
+    const res = await fetch(`https://openapi.programming-hero.com/api/news/${news_id}`)
+    const data = await res.json()
+    //console.log(data.data[0]);
+   showAllWaterDetails(data.data[0])
+}
+
+const showAllWaterDetails = (data) => {
+     console.log(data);
+    const modalDetails = document.getElementById('modale-container');
+   
+         const { title, author,details,thumbnail_url,total_view,_id} = data;
+         modalDetails.innerHTML = `
+            <div class="modal-header">
+            
+            <h5 class="modal-title" id="exampleModalLabel">${title}</h5>
+            </div>
+            <div><img src="${thumbnail_url}" class="card-img-top" alt="..."></div>
+            <div class="modal-body">
+               ${details}
+            </div>
+            <div class="d-flex">
+                <div class="mt-3 w-25 d-flex pt-4">
+                 <img src="${author.img}" class="img-fluid m-3 rounded-circle "alt="...">
+                <div class="ms-2">
+                 <p>${author.name? author.name:'Not Found'}</p>
+                <p>${author.published_date ? author.published_date : 'Not Found'}</p>
+                <div class="">
+                <p><i class="fa-regular fa-eye"></i> ${total_view ?total_view:'0'}</p>
+                </div>
+                </div>
+                </div>
+                
+                </div>
+   `; 
+   
+ }
