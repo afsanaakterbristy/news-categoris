@@ -16,7 +16,8 @@ const setAllMenu = async () => {
     const data = await loadAllCatagoryNews();
     //console.log(data);
    const allMenu = document.getElementById('all-menu');
-   const unique = [];
+    const unique = [];
+  
    for (const news of data) {
         //console.log(news);
          if (unique.indexOf(news.category_name) === -1) {  
@@ -27,7 +28,8 @@ const setAllMenu = async () => {
             <a class="nav-link" aria-current="page" href="#">${news.category_name}</a>
         </li>
              `;
-        allMenu.appendChild(li);
+             allMenu.appendChild(li);
+             spinner(true);
         }
     }
 }
@@ -36,11 +38,16 @@ setAllMenu();
 
 
 const loadAllNews = async (category_id) => {
+    try{
     const url = `https://openapi.programming-hero.com/api/news/category/${category_id}`;
     const res = await fetch(url);
     const data = await res.json();
     // console.log(data.data);
     allNewsCalegory(data.data);
+     }
+    catch (error) {
+        console.log(error);
+    }
     }
 
 
@@ -51,9 +58,8 @@ const allNewsCalegory = (news) => {
          const { title, author,details,thumbnail_url,total_view,_id} = news;
         //console.log(news);
          const newDiv = document.createElement('div');
-        newDiv.classList.add('row')
-        newDiv.classList.add('mb-4')
-        
+        newDiv.classList.add('row');
+        newDiv.classList.add('mb-4'); 
         newDiv.innerHTML = `
           
         <div class="col-md-4">
@@ -62,7 +68,7 @@ const allNewsCalegory = (news) => {
         <div class="col-md-8">
             <div class="card-body">
                 <h5 class="card-title">${title}</h5>
-                <p class="card-text">${details.slice(0,300)}</p>
+                <p class="card-text">${details.slice(0,300) +'...'}</p>
                 <div class="d-flex">
                 <div class="mt-3 w-25 d-flex pt-4">
                  <img src="${author.img}" class="img-fluid rounded-circle w-25"alt="...">
@@ -92,15 +98,20 @@ const allNewsCalegory = (news) => {
         `;
         newsContainer.appendChild(newDiv)
     })
-
+        spinner(false);
 }
 
 
 const showAllDetails = async(news_id) => {
+    try{
     const res = await fetch(`https://openapi.programming-hero.com/api/news/${news_id}`)
     const data = await res.json()
     //console.log(data.data[0]);
-   showAllWaterDetails(data.data[0])
+    showAllWaterDetails(data.data[0]);
+     }
+    catch (error) {
+        console.log(error);
+    }
 }
 
 const showAllWaterDetails = (data) => {
@@ -115,7 +126,7 @@ const showAllWaterDetails = (data) => {
             </div>
             <div><img src="${thumbnail_url}" class="card-img-top" alt="..."></div>
             <div class="modal-body">
-               ${details}
+               ${details.slice(0,300) +'...'}
             </div>
             <div class="d-flex">
                 <div class="mt-3 w-25 d-flex pt-4">
@@ -132,4 +143,13 @@ const showAllWaterDetails = (data) => {
                 </div>
    `; 
    
- }
+}
+ 
+const spinner = isloding => {
+    const spinner = document.getElementById('spinner');
+    if (isloding) {
+        spinner.classList.remove('d-none');
+    } else {
+        spinner.classList.add('d-none');
+    }
+}
