@@ -73,10 +73,10 @@ const allNewsCalegory = (news) => {
         newDiv.innerHTML = `
            <div class="card mb-3 rounded-3 shadow-sm" style="max-width: full;">
            <div class="row g-0">
-        <div class="col-md-4">
+        <div class="col-sm-12 col-md-4">
             <img src="${thumbnail_url}" class="img-fluid rounded-start" alt="...">
         </div>
-        <div class="col-md-8">
+        <div class="col-sm-12 col-md-8">
             <div class="card-body">
                 <h5 class="card-title">${title}</h5>
                 <p class="card-text">${details.slice(0,300) +'...'}</p>
@@ -137,7 +137,7 @@ const showAllWaterDetails = (data) => {
          modalDetails.innerHTML = `
             <div class="modal-header">
             
-            <h5 class="modal-title" id="exampleModalLabel">${title}</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Title:${title}</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div><img src="${thumbnail_url}" class="card-img-top" alt="..."></div>
