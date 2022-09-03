@@ -67,10 +67,9 @@ const allNewsCalegory = (news) => {
         console.log(news.total_view);
        
          const newDiv = document.createElement('div');
-        newDiv.classList.add('row');
-        newDiv.classList.add('mb-4'); 
         newDiv.innerHTML = `
-          
+           <div class="card mb-3 rounded-3 shadow-sm" style="max-width: full;">
+           <div class="row g-0">
         <div class="col-md-4">
             <img src="${thumbnail_url}" class="img-fluid rounded-start" alt="...">
         </div>
@@ -102,6 +101,8 @@ const allNewsCalegory = (news) => {
                 </div>
                 </div>
             </div>
+        </div>
+        </div>
         </div>
                 
         `;
