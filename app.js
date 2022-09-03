@@ -15,7 +15,9 @@ const loadAllCatagoryNews = async () => {
 const setAllMenu = async () => {
     const data = await loadAllCatagoryNews();
     //console.log(data);
-   const allMenu = document.getElementById('all-menu');
+   
+    const allMenu = document.getElementById('all-menu');
+      
     const unique = [];
   
    for (const news of data) {
@@ -24,13 +26,14 @@ const setAllMenu = async () => {
         unique.push(news.category_name);
         const li = document.createElement('li');
              li.innerHTML = `
-        <li onclick="loadAllNews('${news.category_id}')" class="nav-item">
+        <li onclick="loadAllNews('${news.category_id}')+ spinner('${true}')" class="nav-item">
+         
             <a class="nav-link" aria-current="page" href="#">${news.category_name}</a>
         </li>
              `;
              allMenu.appendChild(li);
-             spinner(true);
-        }
+             
+        } 
     }
    
 }
@@ -56,7 +59,7 @@ const loadAllNews = async (category_id) => {
 const allNewsCalegory = (news) => {
     const newsContainer = document.getElementById('news-container');
     newsContainer.innerHTML = ``;
-   
+  
     const inputField = document.getElementById('input-field');
     inputField.value = `${news.length ? news.length + ' News Found' : 'Not Found any News'}`;
     
@@ -65,7 +68,7 @@ const allNewsCalegory = (news) => {
          
          const { title, author,details,thumbnail_url,total_view,_id} = news;
         console.log(news.total_view);
-       
+      
          const newDiv = document.createElement('div');
         newDiv.innerHTML = `
            <div class="card mb-3 rounded-3 shadow-sm" style="max-width: full;">
@@ -108,7 +111,7 @@ const allNewsCalegory = (news) => {
         `;
         newsContainer.appendChild(newDiv)
     })
-        spinner(false);
+      spinner(false);
 }
 
 
