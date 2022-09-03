@@ -80,7 +80,7 @@ const allNewsCalegory = (news) => {
             <div class="card-body">
                 <h5 class="card-title">${title}</h5>
                 <p class="card-text">${details.slice(0,300) +'...'}</p>
-                <div class="d-flex">
+                <div class="d-flex justify-content-sm-between align-content-sm-between">
                 <div class="mt-3 w-25 d-flex pt-4">
                  <img src="${author.img}" class="img-fluid rounded-circle w-25"alt="...">
                 <div class="ms-2">
@@ -89,18 +89,20 @@ const allNewsCalegory = (news) => {
                 <p>${author.published_date ? author.published_date : 'Not Found'}</p>
                 </div>
                 </div>
+                <div class="ms-sm-3 mx-lg-5 mt-5 pt-4">
+                <p><i class="fa-regular fa-eye"></i> ${total_view ? total_view:'0'}</p> 
+                </div>
+              
+                <div class="d-none d-lg-flex  mx-5 mt-5 pt-4 ">
+                  <i class="fa-regular fa-star"></i>
+                  <i class="fa-regular fa-star"></i>
+                  <i class="fa-regular fa-star"></i>
+                  <i class="fa-regular fa-star"></i>
+                  <i class="fa-regular fa-star"></i>
+               
+               </div>
                 <div class="mx-5 mt-5 pt-4">
-                <p><i class="fa-regular fa-eye"></i> ${total_view ? total_view:'0'}</p>
-                </div>
-                <div class="d-flex mx-5 mt-5 pt-4">
-                  <i class="fa-regular fa-star"></i>
-                  <i class="fa-regular fa-star"></i>
-                  <i class="fa-regular fa-star"></i>
-                  <i class="fa-regular fa-star"></i>
-                  <i class="fa-regular fa-star"></i>
-                </div>
-                <div class="ms-5 mt-5 pt-4">
-                <button onclick="showAllDetails('${_id}')" type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">Show Details</button>
+                <button onclick="showAllDetails('${_id}')" type="button" class="btn btn-secondary me-sm-5" data-bs-toggle="modal" data-bs-target="#exampleModal">Show Details</button>
                 </div>
                 </div>
             </div>
@@ -136,6 +138,7 @@ const showAllWaterDetails = (data) => {
             <div class="modal-header">
             
             <h5 class="modal-title" id="exampleModalLabel">${title}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div><img src="${thumbnail_url}" class="card-img-top" alt="..."></div>
             <div class="modal-body">
