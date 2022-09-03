@@ -66,7 +66,7 @@ const allNewsCalegory = (news) => {
     news.forEach(news => {
          
         const { title, author,details,thumbnail_url,total_view,_id} = news;
-        console.log(news.total_view);
+       // console.log(news.total_view);
       
         const newDiv = document.createElement('div');
         newDiv.innerHTML = `
@@ -80,7 +80,7 @@ const allNewsCalegory = (news) => {
                 <h5 class="card-title">${title}</h5>
                 <p class="card-text">${details.slice(0,300) +'...'}</p>
                 <div class="d-flex justify-content-sm-between align-content-sm-between">
-                <div class="mt-3 w-25 d-flex pt-4">
+                <div class="mt-3 mb-sm-3 w-25 d-flex pt-4">
                  <img src="${author.img}" class="img-fluid rounded-circle w-25"alt="...">
                 <div class="ms-2">
                 <p>${author.name? author.name:'Not Found'}</p>                 
