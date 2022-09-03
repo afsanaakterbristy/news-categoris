@@ -73,7 +73,7 @@ const allNewsCalegory = (news) => {
         <div class="card mb-3 rounded-3 shadow-sm" style="max-width: full;">
         <div class="row g-0">
         <div class="col-sm-12 col-md-4">
-            <img src="${thumbnail_url}" class="img-fluid rounded-start" alt="...">
+            <img src="${thumbnail_url}" id="container-image" class="img-fluid rounded-start" alt="...">
         </div>
         <div class="col-sm-12 col-md-8">
             <div class="card-body">
@@ -81,10 +81,10 @@ const allNewsCalegory = (news) => {
                 <p class="card-text">${details.slice(0,300) +'...'}</p>
                 <div class="d-flex justify-content-sm-between align-content-sm-between">
                 <div class="mt-3 mb-sm-3 w-25 d-flex pt-4">
-                 <img src="${author.img}" class="img-fluid rounded-circle w-25"alt="...">
+                 <img src="${author.img}" id="author-img" class="img-fluid rounded-circle w-25"alt="...">
                 <div class="ms-2">
-                <p>${author.name? author.name:'Not Found'}</p>                 
-                <p>${author.published_date ? author.published_date : 'Not Found'}</p>
+                <p id="name">${author.name? author.name:'Not Found'}</p>                 
+                <p id="date">${author.published_date ? author.published_date : 'Not Found'}</p>
                 </div>
                 </div>
                 <div class="ms-sm-3 mx-lg-5 mt-5 pt-4">

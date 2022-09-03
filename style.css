@@ -1,0 +1,17 @@
+@media only screen and (min-width:576px) and (max-width:768px) {
+
+    #container-image{
+          width: 100%;
+    }
+    #author-img{
+        width: 80px;
+        height: 70px;
+    
+    }
+    #name{
+        margin-left: 10px;
+    }
+    #date{
+        margin-left: 10px;
+    }
+}
